@@ -1,12 +1,15 @@
 import { PaymentService } from "../src/PaymentService.js"
 import assert from 'node:assert'
 
-const paymentService = new PaymentService()
-
 describe('Tests for the perform payment method', () => {
-    it('Should perform a payment with value greater than 100', () => {
+    let paymentService
 
-        paymentService.performPayment('123-456-789', 'Test Company', 101 )
+    beforeEach(() => {
+        paymentService = new PaymentService()
+    })
+
+    it('Should perform a payment with value greater than 100', () => {
+        paymentService.performPayment('123-456-789', 'Test Company', 101)
 
         const lastPayment = paymentService.getLastPayment()
 
@@ -14,11 +17,10 @@ describe('Tests for the perform payment method', () => {
         assert.strictEqual(lastPayment.company, 'Test Company')
         assert.strictEqual(lastPayment.amount, 101)
         assert.strictEqual(lastPayment.category, 'cara')
-    }),
+    })
 
     it('Should perform a payment with value equal to 100', () => {
-
-        paymentService.performPayment('123-456-789', 'Test Company', 100 )
+        paymentService.performPayment('123-456-789', 'Test Company', 100)
 
         const lastPayment = paymentService.getLastPayment()
 
@@ -26,11 +28,10 @@ describe('Tests for the perform payment method', () => {
         assert.strictEqual(lastPayment.company, 'Test Company')
         assert.strictEqual(lastPayment.amount, 100)
         assert.strictEqual(lastPayment.category, 'padrão')
-    }),
+    })
 
     it('Should perform a payment with value less than 100', () => {
-
-        paymentService.performPayment('123-456-789', 'Test Company', 99 )
+        paymentService.performPayment('123-456-789', 'Test Company', 99)
 
         const lastPayment = paymentService.getLastPayment()
 
@@ -42,10 +43,15 @@ describe('Tests for the perform payment method', () => {
 })
 
 describe('Tests for the get last payment method', () => {
-    it('Should get the last payment made', () =>{
+    let paymentService
 
-        paymentService.performPayment('123-456-789', 'Test Company 1', 101 )
-        paymentService.performPayment('987-654-321', 'Test Company 2', 99 )
+    beforeEach(() => {
+        paymentService = new PaymentService()
+    })
+
+    it('Should get the last payment made', () => {
+        paymentService.performPayment('123-456-789', 'Test Company 1', 101)
+        paymentService.performPayment('987-654-321', 'Test Company 2', 99)
 
         const lastPayment = paymentService.getLastPayment()
 
