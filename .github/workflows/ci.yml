@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - ci-cd-implementation
   workflow_dispatch:
   schedule:
     - cron: '*/5 * * * 1-5'
@@ -20,7 +19,7 @@ jobs:
       - name: Configurar Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: latest
           cache: npm
 
       - name: Instalar dependências
