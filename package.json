@@ -23,9 +23,7 @@
   },
   "homepage": "https://github.com/leonardodietrich/payment-service#readme",
   "dependencies": {
-    "mocha": "^11.7.5"
-  },
-  "devDependencies": {
+    "mocha": "^11.7.5",
     "mochawesome": "^7.1.4"
   }
 }
